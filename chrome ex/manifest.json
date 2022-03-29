@@ -1,0 +1,33 @@
+{
+    
+    "manifest_version": 2,
+    "name": "firsttime",
+    "description": "super cool bientot",
+    "version": "1.0.0",
+    "content_security_policy":"script-src 'self' https://apis.google.com; object-src 'self'",
+    "browser_action": {
+        "default_popup": "popup1.html",
+        "chrome_style": false
+    },
+    "content_scripts": [
+        {
+        "matches": ["<all_urls>"],
+        "js": ["jquery-3.6.0.min.js","content.js" ],
+        "presistent": "true",
+        "css":        ["style.css"]
+    }
+    ],
+    "background":
+    {
+        "page": "background.js"
+    },   
+    "permissions": [
+        "https://startup-elevator.com/",
+        "http://localhost:4000/*",
+        "http://localhost/*",
+        "declarativeContent",
+        "activeTab",
+        "tabs",
+        "storage"
+        ]
+}
