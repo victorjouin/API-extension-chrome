@@ -23,18 +23,18 @@ function htmlme() {
     '<h1 style="font-size: 20px;">Opportunities</h1>' +
     '</div>' +
     '<br>' +
-    '<form id="formula5" method="PUT" target="_blank" action="http://localhost:3000/projectsA7465D84desrefee7e9e86">' +
-    '<button type="submit" id="submit1" style="width: 60%; padding: 10px; margin: 10px;">Get Contact</button>' +
+    '<form id="formula5" method="PUT" target="_blank" action="https://testingelevator.meteorapp.com/projectsA7465D84desrefee7e9e86">' +
+    '<button type="submit" id="submit1" style="width: 60%; padding: 10px; margin: 10px;">Récupérer Le Dossier</button>' +
     '</form>' +
     '<div align="center" id="contenu" style="list-style: none;align="center";width:80%">' + '</div>' +
-    '<form id="formula" method="GET" target="_blank" action="http://localhost:3000/projectsA7465D84desrefee7e9e86?name="name&firstname="firstname"&tel="test"&email="email"&adresse="adresse"">' +
+    '<form id="formula" method="GET" target="_blank" action="https://testingelevator.meteorapp.com/projectsA7465D84desrefee7e9e86?name="name&firstname="firstname"&tel="test"&email="email"&adresse="adresse"">' +
     '<div id="div_form" style="">' +
     '<input name="name" type="text" style="width: 60%; border: 0px; padding: 10px; margin: 10px;" placeholder = "nom">' +
     '<input name="firstname" type="text" style="width: 60%; border: 0px; padding: 10px; margin: 10px;" placeholder = "prénom">' +
     '<input name="tel" type="text" style="width: 60%; border: 0px; padding: 10px; margin: 10px;" placeholder = "tel">' +
     '<input name="email" type="text" style="width: 60%; border: 0px; padding: 10px; margin: 10px;" placeholder = "email">' +
     '<input name="adresse" type="text" style="width: 60%; border: 0px; padding: 10px; margin: 10px;" placeholder = "adresse">' +
-    '<button type="submit" id="submit" style="width: 60%; padding: 10px; margin: 10px;display: block">New Contact</button> ' +
+    '<button type="submit" id="submit" style="width: 60%; padding: 10px; margin: 10px;display: block">Nouveau Dossier</button> ' +
     '</div>' +
     '</form>' +
     '</div>';
@@ -52,7 +52,7 @@ var currentPage = location.href;
 // récupération donnée API project
 
 const affichage = document.getElementsByName("test");
-const promise01 = fetch("http://localhost:3000/projectsA7465D84desrefee7e9e86");
+const promise01 = fetch("https://testingelevator.meteorapp.com/projectsA7465D84desrefee7e9e86");
 result = false;
 promise01
   .then((response) => {
@@ -71,7 +71,7 @@ promise01
  // récupération donnée API links
 
 const affichage1 = document.getElementsByName("test");
-const promise02 = fetch("http://localhost:3000/link4d8e64AA856HGE496568efd89d86");
+const promise02 = fetch("https://testingelevator.meteorapp.com/link4d8e64AA856HGE496568efd89d86");
 result = false;
 promise02
   .then((response) => {
@@ -141,12 +141,15 @@ function data_display(count) {
       chrome.storage.sync.get(['opportunity', 'links'], function (result) {
         $("#contenu").append('<li style="border: solid;border-color:#D7D7D7;border-width: thick; border-radius: 10px; width:90%;hover : div[name="info"]{display: block}">' +
         '<link rel="stylesheet" href="style.css">' +
-        '<form method="GET" target="_blank" action="http://localhost:3000/link4d8e64AA856HGE496568efd89d86?">' +
+        '<form method="GET" target="_blank" action="https://testingelevator.meteorapp.com/link4d8e64AA856HGE496568efd89d86?">' +
         '<input type="text" style="width: 20%; borde" name="lastname1"value="' + result.opportunity[j].userLastName + '"><br>' +
         '<input type="text style="width: 20%;" type="text" name="email1"value="' + result.opportunity[j].userMail + '"><br>' +
         '<input type="text style="width: 20%;" type="text" name="tel1" value="' + result.opportunity[j].userTel + '"><br>' +
-        '<input type="text style="width: 20%;" type="text" name="state1"value="' + result.opportunity[j].userSituation + '"><br>' +
-        '<input type="text" style="width: 20%;" type="text" name="url" value="' + currentPage + '">' +
+        '<input type="text style="width: 20%;" type="text" name="state1"value="' + result.opportunity[j].userSituation + '"><br><br>'+
+        '<span> ajouter un lien </span><br>' +
+        '<input type="text" style="width: 20%;" type="text" name="url" value="' + currentPage + '"><br>' +
+        '<input type="text" style="width: 20%;" type="text" placeholder = "titre lien" name="url_title"><br>' +
+        '<input type="text" style="width: 20%;" type="text" placeholder = "description lien" name="url_desc"><br>' +
         '<button type="submit" style="">link</button>' +
         '</form>' +
         '<button name="myButton">information</button>' +
@@ -163,7 +166,8 @@ function data_display(count) {
         {
           if(result.opportunity[j]._id == result.links[i].opportunity_id)
           {
-            $("#url"+j).append('<br><a target="_blank" href="'+result.links[i].adresse+'">'+result.links[i].adresse+'<br>');
+            $("#url"+j).append('<br><a target="_blank" href="'+result.links[i].adresse+'">'+result.links[i].url_titre+'</a><br>'+
+            '<span> description: ' + result.links[i].url_desc + '  </span><br><br>');
           }
       }
       $("#contenu").append(
