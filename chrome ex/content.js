@@ -1,5 +1,5 @@
 var script = document.createElement('script');
-script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js';
+
 script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 //div.attachShadow({ mode: 'open' }).innerHTML +=
@@ -23,9 +23,6 @@ function htmlme() {
     '<h1 style="font-size: 20px;">Opportunities</h1>' +
     '</div>' +
     '<br>' +
-    '<form id="formula5" method="PUT" target="_blank" action="https://testingelevator.meteorapp.com/projectsA7465D84desrefee7e9e86">' +
-    '<button type="submit" id="submit1" style="width: 60%; padding: 10px; margin: 10px;">Récupérer Le Dossier</button>' +
-    '</form>' +
     '<div align="center" id="contenu" style="list-style: none;align="center";width:80%">' + '</div>' +
     '<form id="formula" method="GET" target="_blank" action="https://testingelevator.meteorapp.com/projectsA7465D84desrefee7e9e86?name="name&firstname="firstname"&tel="test"&email="email"&adresse="adresse"">' +
     '<div id="div_form" style="">' +
@@ -45,11 +42,7 @@ function htmlme() {
 
 var currentPage = location.href;
 
-
-
-
-
-// récupération donnée API project
+// récupération donnée API project on load
 
 const affichage = document.getElementsByName("test");
 const promise01 = fetch("https://testingelevator.meteorapp.com/projectsA7465D84desrefee7e9e86");
@@ -66,9 +59,7 @@ promise01
   })
 
 
-
-
- // récupération donnée API links
+ // récupération donnée API links on load
 
 const affichage1 = document.getElementsByName("test");
 const promise02 = fetch("https://testingelevator.meteorapp.com/link4d8e64AA856HGE496568efd89d86");
@@ -102,6 +93,17 @@ async function loadparamlink(response) {
 
 // stockage des donnée sur un BD chrome
 function storedata(response, count) {
+  
+  // clean data before adding new data
+  
+  chrome.storage.local.clear(function() {
+    var error = chrome.runtime.lastError;
+    if (error) {
+        console.error(error);
+    }
+    // do something more
+});
+chrome.storage.sync.clear();
   for (var i = 0; i != count; i++) {
     chrome.storage.sync.set({ opportunity: response }, function () {
     });
@@ -146,33 +148,36 @@ function data_display(count) {
         '<input type="text style="width: 20%;" type="text" name="email1"value="' + result.opportunity[j].userMail + '"><br>' +
         '<input type="text style="width: 20%;" type="text" name="tel1" value="' + result.opportunity[j].userTel + '"><br>' +
         '<input type="text style="width: 20%;" type="text" name="state1"value="' + result.opportunity[j].userSituation + '"><br><br>'+
-        '<span> ajouter un lien </span><br>' +
-        '<input type="text" style="width: 20%;" type="text" name="url" value="' + currentPage + '"><br>' +
-        '<input type="text" style="width: 20%;" type="text" placeholder = "titre lien" name="url_title"><br>' +
-        '<input type="text" style="width: 20%;" type="text" placeholder = "description lien" name="url_desc"><br>' +
-        '<button type="submit" style="">link</button>' +
-        '</form>' +
+        '<span name="myButtonlink"><h3>ajouter un lien</h3></span>'+
+        '<div name="link" style="">'+
+          '<input type="text" style="width: 40%;" type="text" name="url" value="' + currentPage + '"><br>' +
+          '<input type="text" style="width: 40%;" type="text" placeholder = "titre lien" name="url_title"><br>' +
+          '<input type="text" style="width: 40%;" type="text" placeholder = "description lien" name="url_desc"><br>' +
+        '<button type="submit" style="">envoyer le lien</button>' +
+        '</div>' +
+        '</form><br>' +
         '<button name="myButton">information</button>' +
         '<div name="info" style="">' +
-        '<span> nom: ' + result.opportunity[j].userLastName + '  </span><br>' +
-        '<span> titre: ' + result.opportunity[j].title + '</span><br>' +
-        '<span> date: ' + result.opportunity[j].nextActionDate + '</span><br>' +
-        '<span> description: ' + result.opportunity[j].description + '</span><br>' +
-        '<span> status: ' + result.opportunity[j].status + '</span><br><br>' +
-        '<span id="url'+j+'"> url </span>'+
-        '<br>');
+          '<span> nom: ' + result.opportunity[j].userLastName + '  </span><br>' +
+          '<span> titre: ' + result.opportunity[j].title + '</span><br>' +
+          '<span> date: ' + result.opportunity[j].nextActionDate + '</span><br>' +
+          '<span> description: ' + result.opportunity[j].description + '</span><br>' +
+          '<span> status: ' + result.opportunity[j].status + '</span><br><br>' +
+          '<span id="url'+j+'"> <h3>url </h3></span>'+
+          '<br>');
         var count1 = result.links.length;
         for(let i = 0;i != count1;i++)
         {
           if(result.opportunity[j]._id == result.links[i].opportunity_id)
           {
-            $("#url"+j).append('<br><a target="_blank" href="'+result.links[i].adresse+'">'+result.links[i].url_titre+'</a><br>'+
+            $("#url"+j).append('titre: <a target="_blank" href="'+result.links[i].adresse+'">'+result.links[i].url_titre+'</a><br>'+
             '<span> description: ' + result.links[i].url_desc + '  </span><br><br>');
           }
       }
       $("#contenu").append(
         '</div>' +
         '</li>' +
+        '<br>'+
         '<br>');
        
     });

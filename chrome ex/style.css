@@ -1,21 +1,31 @@
-
-
-div[name="info"]{
-display: none;
+div[name="info"] {
+    display: none;
 }
+div[name="link"] {
+    display: none;
+}
+
 div[name="info"]:hover {
-display: block;
+    display: block;
+}
+div[name="link"]:hover {
+    display: block;
 }
 
-#contenu li{
-    background-color:#D7D7D7;
+
+#contenu li {
+    background-color: #D7D7D7;
     text-align: left;
     text-decoration: blue;
-}  
+}
 
 
 
-button[name="myButton"]:hover + div[name="info"] {
+button[name="myButton"]:hover+div[name="info"] {
     background-color: #D7D7D7;
-    display: block;    
+    display: block;
+}
+span[name="myButtonlink"]:hover+div[name="link"] {
+    background-color: #D7D7D7;
+    display: block;
 }
