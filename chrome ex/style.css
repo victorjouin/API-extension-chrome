@@ -1,9 +1,6 @@
 div[name="info"] {
     display: none;
 }
-div[name="link"] {
-    display: none;
-}
 
 div[name="info"]:hover {
     display: block;
@@ -11,7 +8,6 @@ div[name="info"]:hover {
 div[name="link"]:hover {
     display: block;
 }
-
 
 #contenu li {
     background-color: #D7D7D7;
@@ -21,11 +17,15 @@ div[name="link"]:hover {
 
 
 
-button[name="myButton"]:hover+div[name="info"] {
+span[name="myButton"]:hover+div[name="info"] {
     background-color: #D7D7D7;
     display: block;
 }
-span[name="myButtonlink"]:hover+div[name="link"] {
+button[name="myButtonlink"]:hover+div[name="link"] {
     background-color: #D7D7D7;
     display: block;
+}
+
+input:checked + label + div[name="info"]{
+  display: block;
 }

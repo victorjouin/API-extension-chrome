@@ -103,16 +103,16 @@ function storedata(response, count) {
     }
     // do something more
 });
-chrome.storage.sync.clear();
+chrome.storage.local.clear();
   for (var i = 0; i != count; i++) {
-    chrome.storage.sync.set({ opportunity: response }, function () {
+    chrome.storage.local.set({ opportunity: response }, function () {
     });
   }
 }
 
 function storedatalink(response, count) {
   for (var i = 0; i != count; i++) {
-    chrome.storage.sync.set({ links: response}, function () {
+    chrome.storage.local.set({ links: response}, function () {
       console.log(result.links[i].adresse);
     });
   }
@@ -125,7 +125,7 @@ function storedatalink(response, count) {
 
 function showdata() {
   var count = 0;
-  chrome.storage.sync.get(['opportunity'], function (result) {
+chrome.storage.local.get(['opportunity'], function (result) {
     count = result.opportunity.length;
     data_display(count);
   });
@@ -133,14 +133,15 @@ function showdata() {
 
 function showdatalink() {
   var count = 0;
-  chrome.storage.sync.get(['links'], function (result) {
+  console.log("data ?",result)
+   chrome.storage.local.get(['links'], function (result) {
     count = result.links.length;
   });
 }
 
 function data_display(count) {
   for (let j = 0; j != count; j++) {
-      chrome.storage.sync.get(['opportunity', 'links'], function (result) {
+      chrome.storage.local.get(['opportunity', 'links'], function (result) {
         $("#contenu").append('<li style="border: solid;border-color:#D7D7D7;border-width: thick; border-radius: 10px; width:90%;hover : div[name="info"]{display: block}">' +
         '<link rel="stylesheet" href="style.css">' +
         '<form method="GET" target="_blank" action="https://testingelevator.meteorapp.com/link4d8e64AA856HGE496568efd89d86?">' +
@@ -148,21 +149,24 @@ function data_display(count) {
         '<input type="text style="width: 20%;" type="text" name="email1"value="' + result.opportunity[j].userMail + '"><br>' +
         '<input type="text style="width: 20%;" type="text" name="tel1" value="' + result.opportunity[j].userTel + '"><br>' +
         '<input type="text style="width: 20%;" type="text" name="state1"value="' + result.opportunity[j].userSituation + '"><br><br>'+
-        '<span name="myButtonlink"><h3>ajouter un lien</h3></span>'+
-        '<div name="link" style="">'+
-          '<input type="text" style="width: 40%;" type="text" name="url" value="' + currentPage + '"><br>' +
-          '<input type="text" style="width: 40%;" type="text" placeholder = "titre lien" name="url_title"><br>' +
-          '<input type="text" style="width: 40%;" type="text" placeholder = "description lien" name="url_desc"><br>' +
-        '<button type="submit" style="">envoyer le lien</button>' +
-        '</div>' +
-        '</form><br>' +
-        '<button name="myButton">information</button>' +
+        '<br>' +
+        '<span name="myButton">information</span>' +
+        '<input type="checkbox" name="my-checkbox" id="opt-in">'+
+        '<label for="opt-in"> afficher</label>'+
         '<div name="info" style="">' +
           '<span> nom: ' + result.opportunity[j].userLastName + '  </span><br>' +
           '<span> titre: ' + result.opportunity[j].title + '</span><br>' +
           '<span> date: ' + result.opportunity[j].nextActionDate + '</span><br>' +
           '<span> description: ' + result.opportunity[j].description + '</span><br>' +
           '<span> status: ' + result.opportunity[j].status + '</span><br><br>' +
+          '<span name="myButtonlink"><h3>ajouter un lien</h3></span>'+
+        '<div name="link" style="">'+
+          '<input type="text" style="width: 40%;" type="text" name="url" value="' + currentPage + '"><br>' +
+          '<input type="text" style="width: 40%;" type="text" placeholder = "titre lien" name="url_title"><br>' +
+          '<input type="text" style="width: 40%;" type="text" placeholder = "description lien" name="url_desc"><br>' +
+        '<button type="submit" style="">envoyer le lien</button>' +
+        '</form>'+
+        '</div>' +
           '<span id="url'+j+'"> <h3>url </h3></span>'+
           '<br>');
         var count1 = result.links.length;
