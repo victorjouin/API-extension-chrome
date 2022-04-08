@@ -42,6 +42,19 @@ function htmlme() {
 
 var currentPage = location.href;
 
+
+function split_url(){
+  if(currentPage.split('/')[2].split('w.')[1])
+  {
+  return(currentPage.split('/')[2].split('w.')[1])
+  }
+else
+  {
+  return currentPage.split('/')[2]
+  }
+}
+
+
 // récupération donnée API project on load
 
 const affichage = document.getElementsByName("test");
@@ -49,10 +62,7 @@ const promise01 = fetch("https://testingelevator.meteorapp.com/projectsA7465D84d
 result = false;
 promise01
   .then((response) => {
-    console.log(response);
-
     const usersData = response.json();
-    console.log(usersData);
     usersData.then((response) => {
       loadparam(response);
     });
@@ -66,10 +76,7 @@ const promise02 = fetch("https://testingelevator.meteorapp.com/link4d8e64AA856HG
 result = false;
 promise02
   .then((response) => {
-    console.log(response);
-
     const usersLink = response.json();
-    console.log(usersLink);
     usersLink.then((response) => {
       loadparamlink(response);
     });
@@ -113,7 +120,6 @@ chrome.storage.local.clear();
 function storedatalink(response, count) {
   for (var i = 0; i != count; i++) {
     chrome.storage.local.set({ links: response}, function () {
-      console.log(result.links[i].adresse);
     });
   }
 }
@@ -145,29 +151,29 @@ function data_display(count) {
         $("#contenu").append('<li style="border: solid;border-color:#D7D7D7;border-width: thick; border-radius: 10px; width:90%;hover : div[name="info"]{display: block}">' +
         '<link rel="stylesheet" href="style.css">' +
         '<form method="GET" target="_blank" action="https://testingelevator.meteorapp.com/link4d8e64AA856HGE496568efd89d86?">' +
-        '<input type="text" style="width: 20%; borde" name="lastname1"value="' + result.opportunity[j].userLastName + '"><br>' +
-        '<input type="text style="width: 20%;" type="text" name="email1"value="' + result.opportunity[j].userMail + '"><br>' +
-        '<input type="text style="width: 20%;" type="text" name="tel1" value="' + result.opportunity[j].userTel + '"><br>' +
-        '<input type="text style="width: 20%;" type="text" name="state1"value="' + result.opportunity[j].userSituation + '"><br><br>'+
+        '<input type="text"  name="lastname1"value="' + result.opportunity[j].userLastName + '"><br>' +
+        '<input type="text"  name="email1"value="' + result.opportunity[j].userMail + '"><br>' +
+        '<input type="text"  name="tel1" value="' + result.opportunity[j].userTel + '"><br>' +
+        '<input type="text"  name="state1"value="' + result.opportunity[j].userSituation + '"><br><br>'+
         '<br>' +
-        '<span name="myButton">information</span>' +
-        '<input type="checkbox" name="my-checkbox" id="opt-in">'+
-        '<label for="opt-in"> afficher</label>'+
+        '<span name="myButton">afficher les informations</span>' +
+        '<input type="checkbox" style="width: 20px;height: 20px;" name="my-checkbox" id="opt-in">'+
+        '<label for="opt-in"></label>'+
         '<div name="info" style="">' +
           '<span> nom: ' + result.opportunity[j].userLastName + '  </span><br>' +
           '<span> titre: ' + result.opportunity[j].title + '</span><br>' +
           '<span> date: ' + result.opportunity[j].nextActionDate + '</span><br>' +
           '<span> description: ' + result.opportunity[j].description + '</span><br>' +
-          '<span> status: ' + result.opportunity[j].status + '</span><br><br>' +
-          '<span name="myButtonlink"><h3>ajouter un lien</h3></span>'+
+          '<span> status: ' + result.opportunity[j].status + '</span><br>' +
+          '<span name="myButtonlink" ><h3 align="center" style="border-top: solid;border-bottom: solid;border-width:2px;border-radius:5px;margin:15px;">ajouter un lien</h3></span>'+
         '<div name="link" style="">'+
-          '<input type="text" style="width: 40%;" type="text" name="url" value="' + currentPage + '"><br>' +
-          '<input type="text" style="width: 40%;" type="text" placeholder = "titre lien" name="url_title"><br>' +
-          '<input type="text" style="width: 40%;" type="text" placeholder = "description lien" name="url_desc"><br>' +
-        '<button type="submit" style="">envoyer le lien</button>' +
+          '<input type="text" style="width: 70%;" type="text" name="url" value="' + currentPage + '"><br>' +
+          '<input type="text" style="width: 70%;" type="text" placeholder = "titre lien" value= "'+split_url()+'" name="url_title"><br>' +
+          '<textarea style="width: 80%;" type="text" placeholder = "description lien" name="url_desc"></textarea> <br>' +
+        '<button type="submit" style="">envoyer le lien ←</button>' +
         '</form>'+
         '</div>' +
-          '<span id="url'+j+'"> <h3>url </h3></span>'+
+          '<span id="url'+j+'"> <h3 align="center" style="border-top: solid;border-bottom: solid;border-width:2px;border-radius:5px;margin:15px;"">Liens du dossier </h3></span>'+
           '<br>');
         var count1 = result.links.length;
         for(let i = 0;i != count1;i++)

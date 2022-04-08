@@ -1,3 +1,8 @@
+div[name="divy"]{
+font-family: Impact,'Haettenschweiler', 'Arial Narrow Bold', sans-serif;
+font-size:medium;
+}
+
 div[name="info"] {
     display: none;
 }
@@ -28,4 +33,5 @@ button[name="myButtonlink"]:hover+div[name="link"] {
 
 input:checked + label + div[name="info"]{
   display: block;
+  margin-top: 10px;
 }
