@@ -43,17 +43,6 @@ function htmlme() {
 var currentPage = location.href;
 
 
-function split_url(){
-  if(currentPage.split('/')[2].split('w.')[1])
-  {
-  return(currentPage.split('/')[2].split('w.')[1])
-  }
-else
-  {
-  return currentPage.split('/')[2]
-  }
-}
-
 
 // récupération donnée API project on load
 
@@ -87,8 +76,10 @@ promise02
 // affichage des données sur l'extension
 
 async function loadparam(response) {
-  const name = response[1].userLastName;
+  console.log(response);
+  const name = response[0].userLastName;
   var count = response.length;
+  console.log("cpicpi",response[0])
   storedata(response, count);
 }
 async function loadparamlink(response) {
@@ -151,29 +142,41 @@ function data_display(count) {
         $("#contenu").append('<li style="border: solid;border-color:#D7D7D7;border-width: thick; border-radius: 10px; width:90%;hover : div[name="info"]{display: block}">' +
         '<link rel="stylesheet" href="style.css">' +
         '<form method="GET" target="_blank" action="https://testingelevator.meteorapp.com/link4d8e64AA856HGE496568efd89d86?">' +
+        '<h3 align="center" style="border-top: solid;border-bottom: solid;border-width:2px;border-radius:5px;margin:15px;">info utilisateur</h3>'+
         '<input type="text"  name="lastname1"value="' + result.opportunity[j].userLastName + '"><br>' +
         '<input type="text"  name="email1"value="' + result.opportunity[j].userMail + '"><br>' +
-        '<input type="text"  name="tel1" value="' + result.opportunity[j].userTel + '"><br>' +
-        '<input type="text"  name="state1"value="' + result.opportunity[j].userSituation + '"><br><br>'+
+        '<input type="text"  name="tel1" value="' + result.opportunity[j].userTel + '"><br><br>' +
+        '<h3 align="center" style="border-top: solid;border-bottom: solid;border-width:2px;border-radius:5px;margin:15px;">info dossier </h3>'+
+        'titre :<input type="text" style="width:40%" name="title" value="' + result.opportunity[j].title + '"><br>'+
+        'type  :<input type="text" style="width:55%" name="type" value="' + result.opportunity[j].type + '"><br>'+
+        'status:<select style="width:40%" name="state1">'+
+        '<option>' + result.opportunity[j].status + '</option><br>'+
+        '<option>nouveau</option><br>'+
+        '<option>assigné</option><br>'+
+        '<option>Analyse du besoin</option><br>'+
+        '<option>Proposition de valeur</option><br>'+
+        '<option>Négociation</option><br>'+
+        '<option>Fermé / Gagné</option><br>'+
+        '<option>Fermé / Perdu</option><br>'+
+        '</select><br>'+
+        'prix  :<input type="text" style="width:40%" name="price" value="' + result.opportunity[j].previsionalFinancement +'"><br><br>'+
+        '<button type="submit" style="">mettre à jour les informations</button><br>'+
         '<br>' +
-        '<span name="myButton">afficher les informations</span>' +
+        '<span name="myButton">plus D`informations</span>' +
         '<input type="checkbox" style="width: 20px;height: 20px;" name="my-checkbox" id="opt-in">'+
         '<label for="opt-in"></label>'+
         '<div name="info" style="">' +
-          '<span> nom: ' + result.opportunity[j].userLastName + '  </span><br>' +
-          '<span> titre: ' + result.opportunity[j].title + '</span><br>' +
           '<span> date: ' + result.opportunity[j].nextActionDate + '</span><br>' +
           '<span> description: ' + result.opportunity[j].description + '</span><br>' +
-          '<span> status: ' + result.opportunity[j].status + '</span><br>' +
           '<span name="myButtonlink" ><h3 align="center" style="border-top: solid;border-bottom: solid;border-width:2px;border-radius:5px;margin:15px;">ajouter un lien</h3></span>'+
         '<div name="link" style="">'+
           '<input type="text" style="width: 70%;" type="text" name="url" value="' + currentPage + '"><br>' +
-          '<input type="text" style="width: 70%;" type="text" placeholder = "titre lien" value= "'+split_url()+'" name="url_title"><br>' +
+          '<input type="text" style="width: 70%;" type="text" placeholder = "titre lien" value= "'+document.title+'" name="url_title"><br>' +
           '<textarea style="width: 80%;" type="text" placeholder = "description lien" name="url_desc"></textarea> <br>' +
         '<button type="submit" style="">envoyer le lien ←</button>' +
         '</form>'+
         '</div>' +
-          '<span id="url'+j+'"> <h3 align="center" style="border-top: solid;border-bottom: solid;border-width:2px;border-radius:5px;margin:15px;"">Liens du dossier </h3></span>'+
+          '<span id="url'+j+'"> <h3 align="center" style="border-top: solid;border-bottom: solid;border-width:2px;border-radius:5px;margin:15px;">Liens du dossier </h3></span>'+
           '<br>');
         var count1 = result.links.length;
         for(let i = 0;i != count1;i++)
