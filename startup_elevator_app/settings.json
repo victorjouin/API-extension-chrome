@@ -1,0 +1,21 @@
+{
+    "env" : { "MONGO_URL": "mongodb://startup-elevator-15157:wt68wakYvsAleKUcdarreC7cBxJRc3@db-startup-elevator-15157.nodechef.com:5389&ssl=false" },
+    "packages": {
+        "mongo": {
+            "options": {
+                "tlsAllowInvalidCertificates": true
+            }
+        }
+    },
+    "startup-elevator.com": {
+        "env": {
+            "MONGO_URL": "mongodb://startup-elevator-15157:wt68wakYvsAleKUcdarreC7cBxJRc3@db-startup-elevator-15157.nodechef.com:5389&ssl=false"
+        }
+    },
+    "127.0.0.1:3000": {
+        "MONGO_URL": "mongodb://startup-elevator-15157:wt68wakYvsAleKUcdarreC7cBxJRc3@db-startup-elevator-15157.nodechef.com:5389&ssl=false",
+        "env": {
+            "MONGO_URL": "mongodb://startup-elevator-15157:wt68wakYvsAleKUcdarreC7cBxJRc3@db-startup-elevator-15157.nodechef.com:5389&ssl=false"
+        }
+    }
+}
