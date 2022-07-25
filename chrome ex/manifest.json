@@ -1,10 +1,14 @@
-{
-    
-    "manifest_version": 2,
+{  
+    "manifest_version": 3,
     "name": "Startup-Elevator Opportinunité",
     "description": "permet de récupérer les dossiers opportunité et d'y ajouter des lien avec note",
     "version": "1.0.0",
-    "content_security_policy":"script-src 'self' https://apis.google.com; object-src 'self'",
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'; object-src 'self'; script-src-elem 'self' 'unsafe-inline' https://apis.google.com;;"
+    },
+    "background.service_worker": {
+        "scripts": ["background.js"]
+    },
     "content_scripts": [
         {
         "matches": ["<all_urls>"],
@@ -13,10 +17,6 @@
         "css":        ["style.css"]
     }
     ],
-    "background":
-    {
-        "page": "background.js"
-    },   
     "permissions": [
         "<all_urls>",
         "declarativeContent",

@@ -2,36 +2,139 @@ div[name="divy"]{
 font-family: Impact,'Haettenschweiler', 'Arial Narrow Bold', sans-serif;
 font-size:medium;
 }
-
 div[name="info"] {
     display: none;
 }
-
 div[name="info"]:hover {
     display: block;
 }
 div[name="link"]:hover {
     display: block;
 }
-
 #contenu li {
     background-color: #D7D7D7;
     text-align: left;
     text-decoration: blue;
 }
-
-
-
-span[name="myButton"]:hover+div[name="info"] {
+span[name="myButton"]:hover+div[name="info"]{
     background-color: #D7D7D7;
     display: block;
 }
-button[name="myButtonlink"]:hover+div[name="link"] {
+button[name="myButtonlink"]:hover+div[name="link"]{
     background-color: #D7D7D7;
     display: block;
 }
 
-input:checked + label + div[name="info"]{
+input[name="my-checkbox"]:checked + label + div[name="info"]{
   display: block;
   margin-top: 10px;
+}
+input[name="my-checkbox2"]:checked + label + div[name="lien"]{
+    display: block;
+    margin-top: 10px;
+  }
+
+.title{
+    font-weight: bold;
+    font-variant: small-caps;
+    text-align: center;
+    font-size: 40px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(204, 204, 204);
+}
+
+.card {
+    padding: 5px;
+     font-size: 14px;
+     border-width: 1px;
+     border-color: #CCCCCC;
+     background-color: #FFFFFF;
+     color: #000000;
+     border-style: solid;
+     border-radius: 3px;
+
+}
+.cardtitle {
+    text-align: center;
+    min-width: 80px;
+    padding: 5px;
+     font-size: 20px;
+     border-width: 1px;
+     border-color: #CCCCCC;
+     background-color: #FFFFFF;
+     color: #000000;
+     border-style: solid;
+     border-radius: 3px;
+
+}
+.font {
+    font-family: Tahoma, Geneva, sans-serif;
+font-size: 14px;
+letter-spacing: 1px;
+word-spacing: 2px;
+color: #000000;
+font-weight: normal;
+text-decoration: none solid rgb(68, 68, 68);
+font-style: normal;
+font-variant: normal;
+text-transform: none;
+}
+.mybutton {
+    margin-left: 5px;
+    background-color:#8edea3;
+	border-radius:5px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	padding:8px 18px;
+	text-decoration:none;
+    border-width: 0px;
+}
+.mybutton_secondary {
+    background-color:#8edea3;
+	border-radius:1px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	text-decoration:none;
+    border-width: 0px;
+}
+.mybutton2 {
+    margin-left: 5px;
+    background-color:#c2c2c2;
+	border-radius:5px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:8px 18px;
+	text-decoration:none;
+    border-width: 0px;
+}
+
+.mybutton3 {
+    margin-left: 5px;
+    background-color:#8edea3;
+	border-radius:5px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:8px 18px;
+	text-decoration:none;
+    border-width: 0px;
+}
+
+.Scheckbox {
+    position: relative;
+    padding-left: 32px;
+    cursor: pointer;
+    margin-bottom: 4px;
+    display: inline-block;
+    font-size: 16px;
 }
